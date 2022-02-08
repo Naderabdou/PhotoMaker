@@ -16,4 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('lang/{locale}', 'Controller@lang')->name('lang');
+
 require __DIR__.'/auth.php';

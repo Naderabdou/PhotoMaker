@@ -39,24 +39,24 @@
 
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right text-align-left">
-                    <li class="active"><a href="{{route('home.index')}}">الرئيسية</a></li>
-                    <li><a href="{{route('About.index')}}">من نحن</a></li>
-                    <li><a href="{{route('services.index')}}">خدماتنا</a></li>
+                    <li class="active"><a href="{{route('home.index')}}">{{__('theme\home.home')}}</a></li>
+                    <li><a href="{{route('About.index')}}">{{__('theme\home.about_us')}}</a></li>
+                    <li><a href="{{route('services.index')}}">{{__('theme\home.services')}}</a></li>
                 </ul>
 
                 <a href="/theme/index.html" class="navbar-brand hidden-xs text-center"><img src="/theme/images/logo.png" alt="LOGO"></a>
 
                 <ul class="nav navbar-nav navbar-left text-align-right">
-                    <li><a href="{{route('gallery.index')}}">معرض الصور</a></li>
-                    <li><a href="{{route('contact.index')}}">اتصل بنا</a></li>
+                    <li><a href="{{route('gallery.index')}}">{{__('theme\home.gallery')}}</a></li>
+                    <li><a href="{{route('contact.index')}}">{{__('theme\home.contact')}}</a></li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{app()->getLocale()}}
                             <span class="caret"></span>
                         </a>
                         <div class="dropdown-menu">
-                            <a style="padding: 10px;" class="dropdown-item" href="{{route('lang','en')}}">English</a><br>
-                            <a style="padding: 10px; " class="dropdown-item" href="{{route('lang','ar')}}">Arabic</a>
+                            <a style="padding: 10px;" class="dropdown-item" href="{{route('lang','en')}}">{{__('theme\home.English')}}</a><br>
+                            <a style="padding: 10px; " class="dropdown-item" href="{{route('lang','ar')}}">{{__('theme\home.Arabic')}}</a>
                         </div>
 
                     </li>
@@ -75,16 +75,12 @@
 <footer class="text-center">
     <div class="container">
 
-        <p>جميع الحقوق محفوظة لمؤسسة صانع الصورة للتجارة  &copy; 2005-2015 </p>
-
-        <a href="#"><i class="fa fa-facebook"></i></a>
-        <a href="#"><i class="fa fa-twitter"></i></a>
-        <a href="#"><i class="fa fa-google-plus"></i></a>
-        <a href="#"><i class="fa fa-instagram"></i></a>
-        <a href="#"><i class="fa fa-youtube"></i></a>
-        <a href="#"><i class="fa fa-pinterest"></i></a>
-        <a href="#"><i class="fa fa-behance"></i></a>
-        <a href="#"><i class="fa fa-vimeo"></i></a>
+        <p>{{__('theme\home.footer')}} </p>
+       @isset($social)
+        <a href="{{$social->facebook_url}}"><i class="fa fa-facebook"></i></a>
+        <a href="{{$social->twitter_url}}"><i class="fa fa-twitter"></i></a>
+        <a href="{{$social->github_url}}"><i class="fa fa-github"></i></a>
+        @endisset
 
     </div>
 </footer>

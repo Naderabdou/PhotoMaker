@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Social extends Model
+class Services extends Model
 {
     use HasFactory;
     protected $fillable=[
-        'facebook_url',
-        'twitter_url',
-        'github_url'
+      'title_ar',
+      'title_en',
+      'desc_ar',
+      'desc_en'
     ];
 }

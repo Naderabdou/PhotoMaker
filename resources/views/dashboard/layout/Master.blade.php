@@ -1,6 +1,9 @@
 
 <!DOCTYPE html>
-<html lang="en" dir="rtl">
+@if(App::getLocale() == 'ar')
+<html lang="{{ str_replace('_', '-', app()->getLocale('')) }}" dir="rtl">
+@else<html lang="{{ str_replace('_', '-', app()->getLocale('')) }}" dir="ltr">@endif
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,10 +16,19 @@
     <title>Limitless - @yield('title')</title>
 
     <!-- Global stylesheets -->
-    <link href="/Admin/RTL/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="/Admin/RTL/assets/css/core.min.css" rel="stylesheet" type="text/css">
-    <link href="/Admin/RTL/assets/css/components.min.css" rel="stylesheet" type="text/css">
-    <link href="/Admin/RTL/assets/css/colors.min.css" rel="stylesheet" type="text/css">
+    @if(App::getLocale() == 'ar')
+        <link href="/admin/RTL/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="/admin/RTL/assets/css/core.min.css" rel="stylesheet" type="text/css">
+        <link href="/admin/RTL/assets/css/components.min.css" rel="stylesheet" type="text/css">
+        <link href="/admin/RTL/assets/css/colors.min.css" rel="stylesheet" type="text/css">
+        <script src="/admin/RTL/assets/js/app.js"></script>
+    @else
+        <link href="/admin/LTR/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="/admin/LTR/assets/css/core.min.css" rel="stylesheet" type="text/css">
+        <link href="/admin/LTR/assets/css/components.min.css" rel="stylesheet" type="text/css">
+        <link href="/admin/LTR/assets/css/colors.min.css" rel="stylesheet" type="text/css">
+        <script src="/admin/LTR/assets/js/app.js"></script>
+    @endif
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
     <link href="/Admin/global_assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
 
@@ -38,7 +50,6 @@
     <script src="/Admin/global_assets/js/plugins/pickers/daterangepicker.js"></script>
 
     <script src="/Admin/global_assets/js/demo_pages/dashboard.js"></script>
-    <script src="/Admin/RTL/assets/js/app.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
 
@@ -154,18 +165,23 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown language-switch">
+                @if(app()->getLocale()=='ar')
                 <a class="dropdown-toggle" data-toggle="dropdown">
-                    <img src="/Admin/global_assets/images/flags/gb.png" class="position-left" alt="">
-                    English
+                    <img src="/Admin/global_assets/images/flags/ar.png" class="position-left" alt="">
+                    Arabic
                     <span class="caret"></span>
                 </a>
-
+                @else
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="/Admin/global_assets/images/flags/gb.png" class="position-left" alt="">
+                        English
+                        <span class="caret"></span>
+                    </a>
+                @endif
                 <ul class="dropdown-menu">
-                    <li><a class="deutsch"><img src="/Admin/global_assets/images/flags/de.png" alt=""> Deutsch</a></li>
-                    <li><a class="ukrainian"><img src="/Admin/global_assets/images/flags/ua.png" alt=""> Українська</a></li>
-                    <li><a class="english"><img src="/Admin/global_assets/images/flags/gb.png" alt=""> English</a></li>
-                    <li><a class="espana"><img src="/Admin/global_assets/images/flags/es.png" alt=""> España</a></li>
-                    <li><a class="russian"><img src="/Admin/global_assets/images/flags/ru.png" alt=""> Русский</a></li>
+                    <li><a href="{{route('lang','en')}}" class="english"><img src="/Admin/global_assets/images/flags/gb.png" alt=""> English</a></li>
+                    <li><a href="{{route('lang','ar')}}"  class="english"><img src="/Admin/global_assets/images/flags/ar.png" alt=""> Arabic</a></li>
+
                 </ul>
             </li>
 
@@ -245,7 +261,14 @@
 
                             <!-- Main -->
                             <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
-                            <li class=""><a href="{{route('admin')}}"><i class="icon-home4"></i> <span>Home</span></a></li>
+                            <li class=""><a href="{{route('admin')}}"><i class="icon-home4"></i> <span>{{__('dashboard\home.home')}}</span></a></li>
+                            <hr>
+                            <li class=""><a href="{{route('social.index')}}"><i class="icon-facebook"></i> <span>{{__('dashboard\home.social_media')}}</span></a></li>
+                            <hr>
+                            <li class=""><a href="{{route('AboutAdmin.index')}}"><i class="icon-google"></i> <span>{{__('dashboard\home.About')}}</span></a></li>
+                            <hr>
+                            <li class=""><a href="{{route('servicesAdmin.index')}}"><i class="icon-list-ordered"></i> <span>{{__('dashboard\home.services')}}</span></a></li>
+
 
 
 
@@ -272,13 +295,6 @@
                         <h4><i class="icon-arrow-right6 position-left"></i> <span class="text-semibold">@yield('text')</span> - Dashboard</h4>
                     </div>
 
-                    <div class="heading-elements">
-                        <div class="heading-btn-group">
-                            <a href="#" class="btn btn-link btn-float has-text"><i class="icon-bars-alt text-primary"></i><span>Statistics</span></a>
-                            <a href="#" class="btn btn-link btn-float has-text"><i class="icon-calculator text-primary"></i> <span>Invoices</span></a>
-                            <a href="#" class="btn btn-link btn-float has-text"><i class="icon-calendar5 text-primary"></i> <span>Schedule</span></a>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="breadcrumb-line">
@@ -296,13 +312,7 @@
                                 <span class="caret"></span>
                             </a>
 
-                            <ul class="dropdown-menu dropdown-menu-right">
-                                <li><a href="#"><i class="icon-user-lock"></i> Account security</a></li>
-                                <li><a href="#"><i class="icon-statistics"></i> Analytics</a></li>
-                                <li><a href="#"><i class="icon-accessibility"></i> Accessibility</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#"><i class="icon-gear"></i> All settings</a></li>
-                            </ul>
+
                         </li>
                     </ul>
                 </div>

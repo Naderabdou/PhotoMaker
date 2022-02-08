@@ -49,20 +49,23 @@
 
     <div class="main-content">
         <div class="container">
-            <h1 class="main-heading">من نحن</h1>
-
+            <h1 class="main-heading">{{__('Theme\home.about_us')}}</h1>
             <div class="text-center div-padding">
-                <p>رواد في الابداع الفني الرقمي لصنع الصورة الاحترافية.</p>
-                <p>نعمل في صانع الصورة بفرق متخصصة ونسخر كافة الوسائل التقنية الحديثة لتعزيز مكانة عملائنا.</p>
-                <p>الإبداع مزيج بين المنطق والخيال ... هكذا نحن </p>
+                @foreach($AboutAdmin as $about)
 
-                <a href="http://training.aljazeera.net/mritems/Documents/2016/2/16/e782075b14c84729a88e703e0776f66a_100.pdf" target="_blank" class="btn btn-white margin"><span>تحميل بروفايل الشركة</span></a>
-                <a href="{{route('gallery.index')}}" class="btn btn-white margin"><span>عرض اعمالنا</span></a>
+                @if(app()->getLocale()=='ar')
+               <p>{{$about->about_desc_ar}}</p>
+                @else
+                    <p>{{$about->about_desc_en}}</p>
+
+                @endif
+                    @endforeach
+
+                <a href="{{route('gallery.index')}}" class="btn btn-white margin"><span>{{__('Theme\home.our_work')}}</span></a>
             </div>
 
-
             <div class="div-small-padding">
-                <h1 class="main-heading">عملائنا</h1>
+                <h1 class="main-heading">{{__('Theme\home.Clients')}}</h1>
 
                 <div class="row">
                     <div class="col-xs-2 col-sm-1 no-padding text-center">
@@ -71,21 +74,15 @@
 
                     <div class="col-xs-8 col-sm-10 no-padding">
                         <div id="owl-demo-products" class="owl-carousel-clients">
+                            @foreach($AboutAdmin as $about)
+
                             <div class="item">
                                 <a class="fancybox-buttons" data-fancybox-group="button" href="images/logo-1.jpg">
-                                    <img src="/theme/images/logo-1.jpg" alt="img">
+                                    <img src="storage/{{$about->client_img}}" alt="img">
+                                    <span>Title:</span><p  style="display: inline"> {{$about->client_title}}</p>
                                 </a>
                             </div>
-                            <div class="item">
-                                <a class="fancybox-buttons" data-fancybox-group="button" href="images/logo-2.jpg">
-                                    <img src="/theme/images/logo-2.jpg" alt="img">
-                                </a>
-                            </div>
-                            <div class="item">
-                                <a class="fancybox-buttons" data-fancybox-group="button" href="images/logo-3.jpg">
-                                    <img src="/theme/images/logo-3.jpg" alt="img">
-                                </a>
-                            </div>
+                            @endforeach
 
                         </div>
                     </div>

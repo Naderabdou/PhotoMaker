@@ -17,11 +17,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
+/*Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth'])->name('dashboard');*/
 Route::group(['middleware'=>'auth'], function() {
     Route::get('dashboard','DashboardController@index')->name('admin');
+    Route::resource('social','SocialController');
+    Route::resource('AboutAdmin','AboutController');
+    Route::resource('servicesAdmin','ServicesController');
 
 });
 
