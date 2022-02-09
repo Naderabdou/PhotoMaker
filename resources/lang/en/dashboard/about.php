@@ -16,9 +16,8 @@ return [
 
     'About'=>'About us',
     'create'=>'create',
-    'about_desc_ar'=>'About Description Ar',
-    'about_desc_en'=>' About Description En',
-    'about_desc'=>'About Description',
+    'about_desc_ar'=>'about_desc_ar',
+    'about_desc_en'=>'about_desc_en',
     'client_title'=>'Client Title',
     'client_img'=>'Client Img'
 

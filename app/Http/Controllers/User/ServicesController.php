@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class ServicesController extends Controller
 {
     public function index(){
-        $social=Social::first();
+        $social=Social::latest()->first();
      $Service=  Services::all();
         return view('Theme.services',compact('social','Service'));
     }

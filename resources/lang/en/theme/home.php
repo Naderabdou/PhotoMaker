@@ -26,7 +26,9 @@ return [
     'empty'=>'There are no services at this time',
 
     'our_work'=>'View our work',
-    'footer'=>'All rights reserved to Image Maker Trade & copy product; 2005-2015'
+    'footer'=>'All rights reserved to Image Maker Trade & copy product; 2005-2015',
+        'work'=>'our work'
+
 
 
 

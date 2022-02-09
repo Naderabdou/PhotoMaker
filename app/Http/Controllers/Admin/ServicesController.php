@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Services\ServicesRequest;
+use App\Http\Requests\Services\ServicesUpdateRequest;
 use App\Models\Services;
 use Illuminate\Http\Request;
 
@@ -12,28 +14,18 @@ class ServicesController extends Controller
         $Service=Services::all();
         return view('dashboard.Services.index',compact('Service'));
     }
-    public function store(Request $request){
-        $data=$request->validate([
-            'title_ar'=>'string|required',
-            'title_en'=>'string|required',
-            'desc_ar'=>'string|required',
-            'desc_en'=>'string|required'
-        ]);
-        Services::create($data);
+    public function store(ServicesRequest $request){
+        $Data=$request->validated();
+        Services::create($Data);
         return redirect()->back();
     }
-    public function update(Request $request,$id){
+    public function update(ServicesUpdateRequest $request,$id){
         $Service=Services::findorFail($id);
-        $data=$request->validate([
-            'title_ar'=>'string|required',
-            'title_en'=>'string|required',
-            'desc_ar'=>'string|required',
-            'desc_en'=>'string|required'
-        ]);
-        $Service->update($data);
+        $Data=$request->validated();
+        $Service->update($Data);
         return redirect()->back();
     }
-    public function show($id){
+    public function destroy($id){
         Services::destroy($id);
         return redirect()->back();
     }

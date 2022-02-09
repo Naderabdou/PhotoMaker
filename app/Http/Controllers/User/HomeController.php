@@ -10,15 +10,9 @@ use Illuminate\Support\Facades\App;
 class HomeController extends Controller
 {
     public function index(){
-        $social=Social::first();
+        $social=Social::latest()->first();
        return view('Theme.index',compact('social'));
     }
-    public function lang(Request $request,$locale)
-    {
 
-session(['APP_LOCALE'=>$locale]);
-        return redirect()->back();
-
-    }
 
 }

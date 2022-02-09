@@ -3,37 +3,31 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Social\SocialRequest;
+use App\Http\Requests\Social\SocialUpdateRequest;
 use App\Models\Social;
 use Illuminate\Http\Request;
 
 class SocialController extends Controller
 {
     public function index(){
-      $social=  Social::all();
-      return view('dashboard.social.index',compact('social'));
+      $Social=  Social::all();
+      return view('dashboard.social.index',compact('Social'));
     }
-    public function store(Request $request){
-     $data=   $request->validate([
-            'facebook_url' => 'required|url',
-            'twitter_url' => 'required|url',
-            'github_url' => 'required|url'
-        ]);
-     Social::create($data);
+    public function store(SocialRequest $request){
+     $Data=   $request->validated();
+     Social::create($Data);
      return redirect()->back();
 
 
     }
-    public function update(Request $request,$id){
-        $social=Social::findorFail($id);
-        $data=   $request->validate([
-            'facebook_url' => 'required|url',
-            'twitter_url' => 'required|url',
-            'github_url' => 'required|url'
-        ]);
-        $social->update($data);
+    public function update(SocialUpdateRequest $request,$id){
+        $Social=Social::findorFail($id);
+        $Data=   $request->validated();
+        $Social->update($Data);
         return redirect()->back();
     }
-public function show($id){
+public function destroy($id){
         Social::destroy($id);
         return redirect()->back();
 }

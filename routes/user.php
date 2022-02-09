@@ -18,8 +18,9 @@ Route::get('/', function () {
 });
 
 Route::resource('home','HomeController');
-Route::get('lang/{locale}', 'HomeController@lang')->name('lang');
-Route::resource('About','AboutController');
+//Route::get('lang/{locale}', 'HomeController@lang')->name('lang');
+
+Route::resource('aboutUs','AboutController');
 Route::resource('services','ServicesController');
 Route::resource('contact','ContactController');
 Route::resource('gallery','GalleryController');

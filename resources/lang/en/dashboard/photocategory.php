@@ -13,12 +13,14 @@ return [
     |
     */
 
-    'home'=>'الرئيسية',
-    'social_media'=>'التواصل الاجتماعي',
-    'About'=>'من نحن',
-    'services'=>'الخدمات',
-    'galleryCate'=>'اقسام الصور',
-    'Gallery'=>'معرض الصور'
+
+    'galleryCate'=>'Photo category',
+    'ar_name'=>'category name_ar',
+    'en_name'=>'category name_en',
+    'image'=>'category photo',
+    'photo'=>'Photos'
+
+
 
 
 ];

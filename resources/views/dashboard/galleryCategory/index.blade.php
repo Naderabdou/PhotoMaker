@@ -11,11 +11,11 @@
 
     <!-- Modal -->
     <div id="myModal" class="modal fade" role="dialog">
-        {!! Form::open(['route' => 'about.store' , 'method'=>'post','class'=>'form-horizontal','enctype'=>'multipart/form-data']) !!}
+        {!! Form::open(['route' => 'category.store' , 'method'=>'post','class'=>'form-horizontal','enctype'=>'multipart/form-data']) !!}
 
         @csrf
 
-        @include('dashboard.about.form')
+        @include('dashboard.galleryCategory.form')
 
         {!! Form::close() !!}
 
@@ -40,10 +40,9 @@
             <thead>
             <tr>
                 <th>{{__('dashboard\social.Id')}}</th>
-                <th>{{__('dashboard\about.about_desc_ar')}}</th>
-                <th>{{__('dashboard\about.about_desc_en')}}</th>
-                <th>{{__('dashboard\about.client_title')}}</th>
-                <th>{{__('dashboard\about.client_img')}}</th>
+                <th>{{__('dashboard\photocategory.ar_name')}}</th>
+                <th>{{__('dashboard\photocategory.en_name')}}</th>
+                <th>{{__('dashboard\photocategory.image')}}</th>
                 <th class="text-center">{{__('dashboard\social.Actions')}}</th>
             </tr>
             </thead>
@@ -51,16 +50,14 @@
             @php
                 $i=0
             @endphp
-            @foreach($about as $Abouts)
+            @foreach($PhotoCate as $PhotoCategories)
                 <tr>
 
 
                     <td>{{++$i}}</td>
-                    <td>{{$Abouts->about_desc_ar}}</td>
-                    <td>{{$Abouts->about_desc_en}}</td>
-
-                    <td>{{$Abouts->client_title}}</td>
-                    <td><img src="/storage/{{$Abouts->client_img}}" style="height: 100px; width: 100px;"></td>
+                    <td>{{$PhotoCategories->ar_name}}</td>
+                    <td>{{$PhotoCategories->en_name}}</td>
+                    <td><img src="/storage/{{$PhotoCategories->image}}" style="height: 100px; width: 100px;"></td>
 
                     <td class="text-center">
                         <ul class="icons-list">
@@ -70,8 +67,8 @@
                                 </a>
 
                                 <ul class="dropdown-menu dropdown-menu-right">
-                                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <button type="button"class="btn btn-primary"style="width:100px ;" data-toggle="modal" data-target="#edit{{$Abouts->id}}"> {{__('dashboard\social.Edit')}} <i class="icon-database-edit2"></i></button></li>
-                                    <form action="{{route('about.destroy',$Abouts->id)}}" method="POST">
+                                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <button type="button"class="btn btn-primary"style="width:100px ;" data-toggle="modal" data-target="#edit{{$PhotoCategories->id}}"> {{__('dashboard\social.Edit')}} <i class="icon-database-edit2"></i></button></li>
+                                    <form action="{{route('category.destroy',$PhotoCategories->id)}}" method="POST">
                                         @csrf
                                         @method('delete')
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <button type="submit"class="btn btn-danger"style="width:100px ;">{{__('dashboard\social.Delete')}}  <i class="icon-database-remove"></i></button>
@@ -83,12 +80,12 @@
                     </td>
 
                 </tr>
-                <div id="edit{{$Abouts->id}}" class="modal fade" role="dialog">
-                    {!! Form::model($Abouts, ['route' => ['about.update', $Abouts->id],'class'=>'form-horizontal','method'=>'PATCH','enctype'=>'multipart/form-data','file'=>true]) !!}
+                <div id="edit{{$PhotoCategories->id}}" class="modal fade" role="dialog">
+                    {!! Form::model($PhotoCategories, ['route' => ['category.update', $PhotoCategories->id],'class'=>'form-horizontal','method'=>'PATCH','enctype'=>'multipart/form-data','file'=>true]) !!}
 
                     @csrf
 
-                    @include('dashboard.about.form')
+                    @include('dashboard.galleryCategory.form')
 
                     {!! Form::close() !!}
 

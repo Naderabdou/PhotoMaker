@@ -16,7 +16,10 @@ return [
    'home'=>'home',
     'social_media'=>'social media',
     'About'=>'About us',
-    'services'=>'services'
+    'services'=>'services',
+    'galleryCate'=>'Photo categories',
+    'Gallery'=>'Photo Gallery'
+
 
 
 ];

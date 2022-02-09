@@ -17,8 +17,8 @@ return [
     'services'=>'services',
     'title_ar'=>'Title Ar' ,
     'title_en'=>'Title En' ,
-    'desc_ar'=>'Description Ar',
-    'desc_en'=>'Description En',
+    'desc_ar'=>'desc_ar',
+    'desc_en'=>'desc_en',
 
 
 

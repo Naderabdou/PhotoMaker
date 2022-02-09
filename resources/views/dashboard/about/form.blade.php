@@ -10,7 +10,7 @@
             {!! Form::label('About Description AR') !!}
             {!! Form::text('about_desc_ar',null,['class'=>'form-control','placeholder'=>'write your About Description']) !!}
             @error('about_desc_ar')
-            <div class="alert alert-danger my-2" role="alert">{{__('dashboard\social.failed_facebook')}}</div>
+            <div class="alert alert-danger my-2" role="alert">{{$message}}</div>
             @enderror
 
         </div>
@@ -18,7 +18,7 @@
             {!! Form::label('About Description EN') !!}
             {!! Form::text('about_desc_en',null,['class'=>'form-control','placeholder'=>'write your About Description']) !!}
             @error('about_desc_en')
-            <div class="alert alert-danger my-2" role="alert">{{__('dashboard\social.failed_facebook')}}</div>
+            <div class="alert alert-danger my-2" role="alert">{{$message}}</div>
             @enderror
 
         </div>
@@ -27,7 +27,7 @@
             {!! Form::label('Client Title ') !!}
             {!! Form::text('client_title',null,['class'=>'form-control','placeholder'=>'write your Client Title']) !!}
             @error('client_title')
-            <div class="alert alert-danger my-2" role="alert">{{__('dashboard\social.failed_twitter')}}</div>
+            <div class="alert alert-danger my-2" role="alert">{{$message}}</div>
             @enderror
 
         </div>

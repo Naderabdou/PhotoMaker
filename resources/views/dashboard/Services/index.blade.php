@@ -11,7 +11,7 @@
 
     <!-- Modal -->
     <div id="myModal" class="modal fade" role="dialog">
-        {!! Form::open(['route' => 'servicesAdmin.store' , 'method'=>'post','class'=>'form-horizontal']) !!}
+        {!! Form::open(['route' => 'service.store' , 'method'=>'post','class'=>'form-horizontal']) !!}
 
         @csrf
 
@@ -72,8 +72,13 @@
 
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <button type="button"class="btn btn-primary"style="width:100px ;" data-toggle="modal" data-target="#edit{{$Services->id}}"> {{__('dashboard\social.Edit')}} <i class="icon-database-edit2"></i></button></li>
-
-                                    <li><a href="{{route('servicesAdmin.destroy',$Services->id )}}" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button"class="btn btn-danger"style="width:100px ;">{{__('dashboard\social.Delete')}}  <i class="icon-database-remove"></i></button>  </a></li>
+                                    <li>
+                                        <form action="{{route('service.destroy',$Services->id)}}" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <button type="submit"class="btn btn-danger"style="width:100px ;">{{__('dashboard\social.Delete')}}  <i class="icon-database-remove"></i></button>
+                                        </form>
+                                    </li>
 
                                 </ul>
                             </li>
@@ -82,7 +87,7 @@
 
                 </tr>
                 <div id="edit{{$Services->id}}" class="modal fade" role="dialog">
-                    {!! Form::model($Services, ['route' => ['servicesAdmin.update', $Services->id],'class'=>'form-horizontal','method'=>'PATCH','enctype'=>'multipart/form-data','file'=>true]) !!}
+                    {!! Form::model($Services, ['route' => ['service.update', $Services->id],'class'=>'form-horizontal','method'=>'PATCH','enctype'=>'multipart/form-data','file'=>true]) !!}
 
                     @csrf
 

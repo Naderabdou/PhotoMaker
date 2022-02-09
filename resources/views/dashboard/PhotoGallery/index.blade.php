@@ -4,18 +4,18 @@
 
     <div style="margin: 10px; ">
         <button style="border-radius: 50px" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
-            {{__('dashboard\social.create')}}  <i class="icon-plus2"></i></button>
+            {{__('dashboard\about.create')}}  <i class="icon-plus2"></i></button>
 
     </div>
 
 
     <!-- Modal -->
     <div id="myModal" class="modal fade" role="dialog">
-        {!! Form::open(['route' => 'social.store' , 'method'=>'post','class'=>'form-horizontal']) !!}
+        {!! Form::open(['route' => 'photo.store' , 'method'=>'post','class'=>'form-horizontal','enctype'=>'multipart/form-data']) !!}
 
         @csrf
 
-        @include('dashboard\social.form')
+        @include('dashboard.PhotoGallery.form')
 
         {!! Form::close() !!}
 
@@ -24,7 +24,7 @@
     <!-- Basic datatable -->
     <div class="panel panel-flat">
         <div class="panel-heading">
-            <h5 class="panel-title">{{__('dashboard\social.title_social')}}</h5>
+            <h5 class="panel-title">{{__('dashboard\about.About')}}</h5>
             <div class="heading-elements">
                 <ul class="icons-list">
                     <li><a data-action="collapse"></a></li>
@@ -40,9 +40,9 @@
             <thead>
             <tr>
                 <th>{{__('dashboard\social.Id')}}</th>
-                <th>{{__('dashboard\social.facebook')}}</th>
-                <th>{{__('dashboard\social.twitter')}}</th>
-                <th>{{__('dashboard\social.github')}}</th>
+                <th>{{__('dashboard\photocategory.ar_name')}}</th>
+                <th>{{__('dashboard\photocategory.en_name')}}</th>
+                <th>{{__('dashboard\photocategory.photo')}}</th>
                 <th class="text-center">{{__('dashboard\social.Actions')}}</th>
             </tr>
             </thead>
@@ -50,14 +50,14 @@
             @php
                 $i=0
             @endphp
-            @foreach($Social as $socials)
+            @foreach($photo as $photos)
                 <tr>
 
 
                     <td>{{++$i}}</td>
-                    <td>{{$socials->facebook_url}}</td>
-                    <td>{{$socials->twitter_url}}</td>
-                    <td>{{$socials->github_url}}</td>
+                    <td>{{$photos->gallery->ar_name}}</td>
+                    <td>{{$photos->gallery->en_name}}</td>
+                    <td><img src="/storage/{{$photos->image}}" style="height: 100px; width: 100px;"></td>
 
                     <td class="text-center">
                         <ul class="icons-list">
@@ -67,17 +67,12 @@
                                 </a>
 
                                 <ul class="dropdown-menu dropdown-menu-right">
-                                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <button type="button"class="btn btn-primary"style="width:100px ;" data-toggle="modal" data-target="#edit{{$socials->id}}"> {{__('dashboard\social.Edit')}} <i class="icon-database-edit2"></i></button></li>
-
-                                    <li>
-                                        <form action="{{route('social.destroy',$socials->id)}}" method="POST">
-                                            @csrf
-                                            @method('delete')
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <button type="submit"class="btn btn-danger"style="width:100px ;">{{__('dashboard\social.Delete')}}  <i class="icon-database-remove"></i></button>
-                                        </form>
-                                    </li>
-
-
+                                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <button type="button"class="btn btn-primary"style="width:100px ;" data-toggle="modal" data-target="#edit{{$photos->id}}"> {{__('dashboard\social.Edit')}} <i class="icon-database-edit2"></i></button></li>
+                                    <form action="{{route('photo.destroy',$photos->id)}}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <button type="submit"class="btn btn-danger"style="width:100px ;">{{__('dashboard\social.Delete')}}  <i class="icon-database-remove"></i></button>
+                                    </form>
 
                                 </ul>
                             </li>
@@ -85,12 +80,12 @@
                     </td>
 
                 </tr>
-                <div id="edit{{$socials->id}}" class="modal fade" role="dialog">
-                    {!! Form::model($socials, ['route' => ['social.update', $socials->id],'class'=>'form-horizontal','method'=>'PATCH']) !!}
+                <div id="edit{{$photos->id}}" class="modal fade" role="dialog">
+                    {!! Form::model($photos, ['route' => ['photo.update', $photos->id],'class'=>'form-horizontal','method'=>'PATCH','enctype'=>'multipart/form-data','file'=>true]) !!}
 
                     @csrf
 
-                    @include('dashboard.social.form')
+                    @include('dashboard.PhotoGallery.form')
 
                     {!! Form::close() !!}
 

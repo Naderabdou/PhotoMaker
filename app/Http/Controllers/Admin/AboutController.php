@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\About\AboutRequest;
+use App\Http\Requests\About\AboutUpdateRequest;
 use App\Models\About;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -10,17 +12,13 @@ use Illuminate\Support\Facades\Storage;
 class AboutController extends Controller
 {
     public function index(){
-        $About=About::all();
-        return view('dashboard.about.index',compact('About'));
+        $about=About::all();
+        return view('dashboard.about.index',compact('about'));
     }
-    public function store(Request $request){
-        $data=$request->validate([
-            'about_desc_ar'=>'string',
-            'about_desc_en'=>'string',
-            'client_title'=>'string',
-            'client_img'=>'image|mimes:jpeg,png,jpg,gif,svg'
+    public function store(AboutRequest $request){
+        $data=$request->validated();
 
-        ]);
+
         if ($data['client_img'] != ''){
             $path=Storage::disk('public')->putFile('/About',$request->client_img);
             $data['client_img']=$path;
@@ -30,18 +28,17 @@ class AboutController extends Controller
 
 
     }
-    public function update(Request $request,$id){
-        $About=About::findorFail($id);
-        $data=$request->validate([
-            'about_desc_ar'=>'string',
-            'about_desc_en'=>'string',
-            'client_title'=>'string',
-            'client_img'=>'required|image|mimes:jpeg,png,jpg,gif,svg'
-        ]);
-        $About->update($data);
+    public function update(AboutUpdateRequest $request,$id){
+        $about=About::findorFail($id);
+        $data=$request->validated();
+        if ($data['client_img'] != ''){
+            $path=Storage::disk('public')->putFile('/About',$request->client_img);
+            $data['client_img']=$path;
+        }
+        $about->update($data);
         return redirect()->back();
     }
-    public function show($id){
+    public function destroy($id){
         About::destroy($id);
         return redirect()->back();
     }

@@ -40,7 +40,7 @@
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right text-align-left">
                     <li class="active"><a href="{{route('home.index')}}">{{__('theme\home.home')}}</a></li>
-                    <li><a href="{{route('About.index')}}">{{__('theme\home.about_us')}}</a></li>
+                    <li><a href="{{route('aboutUs.index')}}">{{__('theme\home.about_us')}}</a></li>
                     <li><a href="{{route('services.index')}}">{{__('theme\home.services')}}</a></li>
                 </ul>
 

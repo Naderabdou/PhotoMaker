@@ -13,7 +13,7 @@
     <meta name="time" content="{{now()}}">
 
 
-    <title>Limitless - @yield('title')</title>
+    <title>Limitless - @stack('title')</title>
 
     <!-- Global stylesheets -->
     @if(App::getLocale() == 'ar')
@@ -34,7 +34,7 @@
 
 
     <!-- /global stylesheets -->
-@yield('css')
+@stack('css')
     <!-- Core JS files -->
     <script src="/Admin/global_assets/js/plugins/loaders/pace.min.js"></script>
     <script src="/Admin/global_assets/js/core/libraries/jquery.min.js"></script>
@@ -56,7 +56,6 @@
 
 
 
-@yield('js')
 
 
     <!-- /theme JS files -->
@@ -265,9 +264,19 @@
                             <hr>
                             <li class=""><a href="{{route('social.index')}}"><i class="icon-facebook"></i> <span>{{__('dashboard\home.social_media')}}</span></a></li>
                             <hr>
-                            <li class=""><a href="{{route('AboutAdmin.index')}}"><i class="icon-google"></i> <span>{{__('dashboard\home.About')}}</span></a></li>
+                            <li class=""><a href="{{route('about.index')}}"><i class="icon-google"></i> <span>{{__('dashboard\home.About')}}</span></a></li>
                             <hr>
-                            <li class=""><a href="{{route('servicesAdmin.index')}}"><i class="icon-list-ordered"></i> <span>{{__('dashboard\home.services')}}</span></a></li>
+                            <li class=""><a href="{{route('service.index')}}"><i class="icon-list-ordered"></i> <span>{{__('dashboard\home.services')}}</span></a></li>
+                            <hr>
+                            <li>
+                                <a href="#"><i class="icon-book"></i><span>{{__('dashboard\home.Gallery')}}</span></a>
+                                <ul>
+                                    <li class=""><a href="{{route('category.index')}}"><i class="icon-database"></i> <span>{{__('dashboard\home.galleryCate')}}</span></a></li>
+                                    <li class=""><a href="{{route('photo.index')}}"><i class="icon-image-compare"></i> <span>{{__('dashboard\photocategory.photo')}}</span></a></li>
+
+
+                                </ul>
+                            </li>
 
 
 
@@ -343,7 +352,7 @@
 
 </div>
 <!-- /page container -->
-
+@stack('js')
 </body>
 </html>
 
