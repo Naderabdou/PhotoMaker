@@ -15,7 +15,7 @@
             @enderror
 
         </div>
-        <button style="margin: 20px"  class="btn btn-success" id="create" onclick="create">Create Services</button>
+
 
         <div class="modal-body">
             {!! Form::label('Services_En') !!}
@@ -25,12 +25,19 @@
             @enderror
 
         </div>
+        <button style="margin: 20px"  class="btn btn-success" id="create" onclick="create">Create Services</button>
         <div id="div" class="modal-body" style="display: none">
 
         </div>
+        @error('name_ar')
+        <div class="alert alert-danger my-2" role="alert">{{$message}}</div>
+        @enderror
         <div id="diven" class="modal-body" style="display: none">
 
         </div>
+        @error('name_en')
+        <div class="alert alert-danger my-2" role="alert">{{$message}}</div>
+        @enderror
 
         <div class="modal-body">
             {!! Form::label('contact_id',' :Category Name ') !!}<br>
