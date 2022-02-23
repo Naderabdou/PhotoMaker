@@ -22,7 +22,7 @@ class CreateContactsTable extends Migration
             $table->string('file')->nullable();
             $table->string('other')->nullable();
             $table->integer('photo')->nullable();
-            $table->enum('status',['active','unactive'])->default('unactive');
+            $table->enum('status',['active','unactive'])->nullable();
 
             $table->timestamps();
         });

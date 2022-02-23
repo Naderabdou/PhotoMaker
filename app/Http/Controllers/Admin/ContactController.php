@@ -18,7 +18,6 @@ class ContactController extends Controller
         $data=$request->validated();
         $services=[];
         array_push($services,['services'=>$data['services_id']]);
-dd($services);
         if ($data['file'] != ''){
             $path=Storage::disk('public')->putFile('/contact',$request->file);
             $data['file']=$path;

@@ -63,6 +63,7 @@
                             @csrf
                             <input type="hidden" name="id" value="{{$contacts-> id}}" />
                             <select class="form-select" aria-label="Default select example" onchange="this.form.submit()" name="status">
+                                <option disabled selected>open this select</option>
                                 <option value="active" {{$contacts->status == 'active' ? 'disabled selected' : ''}} >Active</option>
                                 <option value="unactive"  {{$contacts->status == 'unactive' ? 'disabled selected' : ''}} >Un Active</option>
 
@@ -70,7 +71,8 @@
 
                             <br>
 
-                        </form><br>
+                        </form>
+                        <br>
                         @if($contacts->status=='active')
                             <button type="button" class="btn btn-success">{{$contacts->status}}</button>
                         @endif
