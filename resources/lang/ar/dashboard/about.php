@@ -16,8 +16,8 @@ return [
 
     'About'=>'من نحن',
     'create'=>'انشاء',
-    'about_desc_ar'=>'وصف عن من نحن بالعربي',
-    'about_desc_en'=>' وصف عن من نحن بالانجليزي',
+    'about_desc_ar'=>'وصف من نحن بالعربي',
+    'about_desc_en'=>' وصف من نحن بالانجليزي',
 
     'client_title'=>'وصف عن العملاء',
     'client_img'=>'صور العملاء'

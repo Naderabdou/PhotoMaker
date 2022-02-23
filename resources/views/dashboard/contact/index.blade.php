@@ -1,4 +1,47 @@
 @extends('dashboard.layout.Master')
+@section('js')
+
+
+
+
+    <script>
+
+    document.getElementById('create').addEventListener('click',function (e){
+
+        e.preventDefault();
+        let div =document.getElementById('div')
+        div.style.display='block'
+        let input= document.createElement('input')
+
+        let label= document.createElement('label')
+        label.setAttribute('for','name_ar')
+        label.innerHTML='Services ar'
+        input.setAttribute('name','name_ar[]');
+        input.setAttribute('class','form-control')
+
+        let inputen= document.createElement('input')
+        let labelen= document.createElement('label')
+        labelen.setAttribute('for','name_en')
+        labelen.innerHTML='Services en'
+        inputen.setAttribute('name','name_en[]');
+        inputen.setAttribute('class','form-control')
+
+
+
+
+
+        div.appendChild(label)
+        div.appendChild(input)
+        div.appendChild(labelen)
+        div.appendChild(inputen)
+
+
+
+
+    })
+
+    </script>
+@endsection
 @section('content')
     <!-- Trigger the modal with a button -->
 
@@ -11,11 +54,11 @@
 
     <!-- Modal -->
     <div id="myModal" class="modal fade" role="dialog">
-        {!! Form::open(['route' => 'category.store' , 'method'=>'post','class'=>'form-horizontal','enctype'=>'multipart/form-data']) !!}
+        {!! Form::open(['route' => 'contact.store' , 'method'=>'post','class'=>'form-horizontal','enctype'=>'multipart/form-data']) !!}
 
         @csrf
 
-        @include('dashboard.galleryCategory.form')
+        @include('dashboard.contact.form')
 
         {!! Form::close() !!}
 
@@ -28,7 +71,7 @@
     <!-- Basic datatable -->
     <div class="panel panel-flat">
         <div class="panel-heading">
-            <h5 class="panel-title">{{__('dashboard\about.About')}}</h5>
+            <h5 class="panel-title">{{__('dashboard\home.contact')}}</h5>
             <div class="heading-elements">
                 <ul class="icons-list">
                     <li><a data-action="collapse"></a></li>
@@ -46,7 +89,9 @@
                 <th>{{__('dashboard\social.Id')}}</th>
                 <th>{{__('dashboard\photocategory.ar_name')}}</th>
                 <th>{{__('dashboard\photocategory.en_name')}}</th>
-                <th>{{__('dashboard\photocategory.image')}}</th>
+                <th>{{__('dashboard\home.services_en')}}</th>
+                <th>{{__('dashboard\home.services_ar')}}</th>
+
                 <th class="text-center">{{__('dashboard\social.Actions')}}</th>
             </tr>
             </thead>
@@ -54,14 +99,23 @@
             @php
                 $i=0
             @endphp
-            @foreach($PhotoCate as $PhotoCategories)
+            @foreach($contact as $contacts)`
                 <tr>
 
 
                     <td>{{++$i}}</td>
-                    <td>{{$PhotoCategories->ar_name}}</td>
-                    <td>{{$PhotoCategories->en_name}}</td>
-                    <td><img src="/storage/{{$PhotoCategories->image}}" style="height: 100px; width: 100px;"></td>
+                    <td>{{$contacts->ServicesCate->name_ar}}</td>
+                    <td>{{$contacts->ServicesCate->name_en}}</td>
+                   <td>{{$contacts->name_ar}}</td>
+                    <td>{{$contacts->name_en}}</td>
+
+
+
+
+
+
+
+
 
                     <td class="text-center">
                         <ul class="icons-list">
@@ -71,8 +125,8 @@
                                 </a>
 
                                 <ul class="dropdown-menu dropdown-menu-right">
-                                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <button type="button"class="btn btn-primary"style="width:100px ;" data-toggle="modal" data-target="#edit{{$PhotoCategories->id}}"> {{__('dashboard\social.Edit')}} <i class="icon-database-edit2"></i></button></li>
-                                    <form action="{{route('category.destroy',$PhotoCategories->id)}}" method="POST">
+                                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <button type="button"class="btn btn-primary"style="width:100px ;" data-toggle="modal" data-target="#edit{{$contacts->id}}"> {{__('dashboard\social.Edit')}} <i class="icon-database-edit2"></i></button></li>
+                                    <form action="{{route('contact.destroy',$contacts->id)}}" method="POST">
                                         @csrf
                                         @method('delete')
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <button type="submit"class="btn btn-danger"style="width:100px ;">{{__('dashboard\social.Delete')}}  <i class="icon-database-remove"></i></button>
@@ -84,12 +138,12 @@
                     </td>
 
                 </tr>
-                <div id="edit{{$PhotoCategories->id}}" class="modal fade" role="dialog">
-                    {!! Form::model($PhotoCategories, ['route' => ['category.update', $PhotoCategories->id],'class'=>'form-horizontal','method'=>'PATCH','enctype'=>'multipart/form-data','file'=>true]) !!}
+                <div id="edit{{$contacts->id}}" class="modal fade" role="dialog">
+                    {!! Form::model($contacts, ['route' => ['contact.update', $contacts->id],'class'=>'form-horizontal','method'=>'PATCH','enctype'=>'multipart/form-data','file'=>true]) !!}
 
                     @csrf
 
-                    @include('dashboard.galleryCategory.form')
+                    @include('dashboard.contact.form')
 
                     {!! Form::close() !!}
 

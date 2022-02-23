@@ -23,12 +23,21 @@ class GalleryCategoryController extends Controller
         }
 
         GalleryCategory::create($data);
-        return redirect()->back();
+        if (app()->getLocale()=='ar'){
+            $message=' تم الاضافة بنجاح';
+
+        }
+        else{
+            $message='Added successfully ';
+        };
+
+
+        return redirect()->back()->with('message', $message);
     }
     public function update(GalleryCategoryUpdateRequest $request, $id){
         $gallerycategoryUpdate= GalleryCategory::findorFail($id);
         $data=$request->validated();
-        if ($data['image'] != ''){
+        if ($request->has('image')){
             $path=Storage::disk('public')->putFile('/GalleryCategory',$request->image);
             $data['image']=$path;
         }
@@ -38,11 +47,29 @@ class GalleryCategoryController extends Controller
         $gallerycategoryUpdate->update($data);
 
 
-        return redirect()->back();
+        if (app()->getLocale()=='ar'){
+            $message=' تم التعديل بنجاح';
+
+        }
+        else{
+            $message='Edited successfully  ';
+        };
+
+
+        return redirect()->back()->with('message', $message);
 
     }
     public function destroy($id){
         GalleryCategory::destroy($id);
-        return redirect()->back();
+        if (app()->getLocale()=='ar'){
+            $message=' تم الحذف بنجاح';
+
+        }
+        else{
+            $message='Deleted  successfully  ';
+        };
+
+
+        return redirect()->back()->with('message', $message);
     }
 }

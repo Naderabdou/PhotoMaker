@@ -22,7 +22,7 @@ Route::resource('home','HomeController');
 
 Route::resource('aboutUs','AboutController');
 Route::resource('services','ServicesController');
-Route::resource('contact','ContactController');
+Route::resource('contactus','ContactController');
 Route::resource('gallery','GalleryController');
 
 

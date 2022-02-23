@@ -20,7 +20,11 @@
         {!! Form::close() !!}
 
     </div>
-
+    @if(session()->has('message'))
+        <div class="alert alert-success">
+            {{ session()->get('message') }}
+        </div>
+    @endif
     <!-- Basic datatable -->
     <div class="panel panel-flat">
         <div class="panel-heading">

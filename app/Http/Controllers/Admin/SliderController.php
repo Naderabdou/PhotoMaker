@@ -3,27 +3,28 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\About\AboutRequest;
-use App\Http\Requests\About\AboutUpdateRequest;
-use App\Models\About;
+use App\Models\Slider;
+use App\Models\Social;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class AboutController extends Controller
+class SliderController extends Controller
 {
     public function index(){
-        $about=About::all();
-        return view('dashboard.about.index',compact('about'));
+        $slider=Slider::get();
+        return view('dashboard.slider.index',compact('slider'));
     }
-    public function store(AboutRequest $request){
-        $data=$request->validated();
+    public function store(Request $request){
+        $data=$request->validate([
+            'img'=>'required|image|mimes:jpeg,png,jpg,gif,svg'
+        ]);
 
-
-        if ($data['client_img'] != ''){
-            $path=Storage::disk('public')->putFile('/About',$request->client_img);
-            $data['client_img']=$path;
+        if ($data['img'] != ''){
+            $path=Storage::disk('public')->putFile('/slider',$request->img);
+            $data['img']=$path;
         }
-        About::create($data);
+        Slider::create($data);
+
         if (app()->getLocale()=='ar'){
             $message=' تم الاضافة بنجاح';
 
@@ -35,17 +36,17 @@ class AboutController extends Controller
 
         return redirect()->back()->with('message', $message);
 
-
     }
-    public function update(AboutUpdateRequest $request,$id){
-        $about=About::findorFail($id);
-        $data=$request->validated();
-
-        if ($request->has('client_img')){
-            $path=Storage::disk('public')->putFile('/About',$request->client_img);
-            $data['client_img']=$path;
+    public function update(Request $request,$id){
+        $slider=Slider::findorFail($id);
+        $data=$request->validate([
+            'img'=>'image|mimes:jpeg,png,jpg,gif,svg'
+        ]);
+        if ($request->has('img')){
+            $path=Storage::disk('public')->putFile('/GalleryCategory',$request->img);
+            $data['img']=$path;
         }
-        $about->update($data);
+        $slider->update($data);
         if (app()->getLocale()=='ar'){
             $message=' تم التعديل بنجاح';
 
@@ -56,9 +57,10 @@ class AboutController extends Controller
 
 
         return redirect()->back()->with('message', $message);
+
     }
     public function destroy($id){
-        About::destroy($id);
+        Slider::destroy($id);
         if (app()->getLocale()=='ar'){
             $message=' تم الحذف بنجاح';
 
@@ -70,4 +72,5 @@ class AboutController extends Controller
 
         return redirect()->back()->with('message', $message);
     }
+
 }

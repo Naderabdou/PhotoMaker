@@ -31,20 +31,47 @@ class PhotoGalleryController extends Controller
             $data['image']=$path;
         }
         PhotoGallery::create($data);
-        return redirect()->back();
+        if (app()->getLocale()=='ar'){
+            $message=' تم الاضافة بنجاح';
+
+        }
+        else{
+            $message='Added successfully ';
+        };
+
+
+        return redirect()->back()->with('message', $message);
     }
     public function update(PhotoGalleryUpdateRequest $request,$id){
         $photo=PhotoGallery::findorFail($id);
          $data=$request->validated();
-        if ($data['image'] != ''){
+        if ($request->has('image')){
             $path=Storage::disk('public')->putFile('/GalleryCategory',$request->image);
             $data['image']=$path;
         }
         $photo->update($data);
-        return redirect()->back();
+        if (app()->getLocale()=='ar'){
+            $message=' تم التعديل بنجاح';
+
+        }
+        else{
+            $message='Edited successfully  ';
+        };
+
+
+        return redirect()->back()->with('message', $message);
     }
     public function destroy($id){
         PhotoGallery::destroy($id);
-        return redirect()->back();
+        if (app()->getLocale()=='ar'){
+            $message=' تم الحذف بنجاح';
+
+        }
+        else{
+            $message='Deleted  successfully  ';
+        };
+
+
+        return redirect()->back()->with('message', $message);
     }
 }

@@ -11,11 +11,11 @@
 
     <!-- Modal -->
     <div id="myModal" class="modal fade" role="dialog">
-        {!! Form::open(['route' => 'category.store' , 'method'=>'post','class'=>'form-horizontal','enctype'=>'multipart/form-data']) !!}
+        {!! Form::open(['route' => 'categoryContact.store' , 'method'=>'post','class'=>'form-horizontal','enctype'=>'multipart/form-data']) !!}
 
         @csrf
 
-        @include('dashboard.galleryCategory.form')
+        @include('dashboard.contact.categoryform')
 
         {!! Form::close() !!}
 
@@ -28,7 +28,7 @@
     <!-- Basic datatable -->
     <div class="panel panel-flat">
         <div class="panel-heading">
-            <h5 class="panel-title">{{__('dashboard\about.About')}}</h5>
+            <h5 class="panel-title">{{__('dashboard\home.contact')}}</h5>
             <div class="heading-elements">
                 <ul class="icons-list">
                     <li><a data-action="collapse"></a></li>
@@ -46,7 +46,6 @@
                 <th>{{__('dashboard\social.Id')}}</th>
                 <th>{{__('dashboard\photocategory.ar_name')}}</th>
                 <th>{{__('dashboard\photocategory.en_name')}}</th>
-                <th>{{__('dashboard\photocategory.image')}}</th>
                 <th class="text-center">{{__('dashboard\social.Actions')}}</th>
             </tr>
             </thead>
@@ -54,14 +53,17 @@
             @php
                 $i=0
             @endphp
-            @foreach($PhotoCate as $PhotoCategories)
+            @foreach($category as $categories)`
                 <tr>
 
 
                     <td>{{++$i}}</td>
-                    <td>{{$PhotoCategories->ar_name}}</td>
-                    <td>{{$PhotoCategories->en_name}}</td>
-                    <td><img src="/storage/{{$PhotoCategories->image}}" style="height: 100px; width: 100px;"></td>
+                    <td>{{$categories->name_ar}}</td>
+                    <td>{{$categories->name_en}}</td>
+
+
+
+
 
                     <td class="text-center">
                         <ul class="icons-list">
@@ -71,8 +73,8 @@
                                 </a>
 
                                 <ul class="dropdown-menu dropdown-menu-right">
-                                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <button type="button"class="btn btn-primary"style="width:100px ;" data-toggle="modal" data-target="#edit{{$PhotoCategories->id}}"> {{__('dashboard\social.Edit')}} <i class="icon-database-edit2"></i></button></li>
-                                    <form action="{{route('category.destroy',$PhotoCategories->id)}}" method="POST">
+                                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <button type="button"class="btn btn-primary"style="width:100px ;" data-toggle="modal" data-target="#edit{{$categories->id}}"> {{__('dashboard\social.Edit')}} <i class="icon-database-edit2"></i></button></li>
+                                    <form action="{{route('categoryContact.destroy',$categories->id)}}" method="POST">
                                         @csrf
                                         @method('delete')
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <button type="submit"class="btn btn-danger"style="width:100px ;">{{__('dashboard\social.Delete')}}  <i class="icon-database-remove"></i></button>
@@ -84,12 +86,12 @@
                     </td>
 
                 </tr>
-                <div id="edit{{$PhotoCategories->id}}" class="modal fade" role="dialog">
-                    {!! Form::model($PhotoCategories, ['route' => ['category.update', $PhotoCategories->id],'class'=>'form-horizontal','method'=>'PATCH','enctype'=>'multipart/form-data','file'=>true]) !!}
+                <div id="edit{{$categories->id}}" class="modal fade" role="dialog">
+                    {!! Form::model($categories, ['route' => ['categoryContact.update', $categories->id],'class'=>'form-horizontal','method'=>'PATCH','enctype'=>'multipart/form-data','file'=>true]) !!}
 
                     @csrf
 
-                    @include('dashboard.galleryCategory.form')
+                    @include('dashboard.contact.categoryform')
 
                     {!! Form::close() !!}
 

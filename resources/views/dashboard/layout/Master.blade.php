@@ -264,6 +264,8 @@
                             <hr>
                             <li class=""><a href="{{route('social.index')}}"><i class="icon-facebook"></i> <span>{{__('dashboard\home.social_media')}}</span></a></li>
                             <hr>
+                            <li class=""><a href="{{route('slider.index')}}"><i class="icon-fence"></i> <span>{{__('dashboard\home.slider')}}</span></a></li>
+                            <hr>
                             <li class=""><a href="{{route('about.index')}}"><i class="icon-google"></i> <span>{{__('dashboard\home.About')}}</span></a></li>
                             <hr>
                             <li class=""><a href="{{route('service.index')}}"><i class="icon-list-ordered"></i> <span>{{__('dashboard\home.services')}}</span></a></li>
@@ -277,6 +279,21 @@
 
                                 </ul>
                             </li>
+                            <hr>
+                            <li>
+                                <a href="#"><i class="icon-phone"></i><span>{{__('dashboard\home.contact')}}</span></a>
+                                <ul>
+                                    <li class=""><a href="{{route('categoryContact.index')}}"><i class="icon-image-compare"></i> <span>{{__('dashboard\home.service-cate')}}</span></a></li>
+
+                                    <li class=""><a href="{{route('contact.index')}}"><i class="icon-database-menu"></i> <span>{{__('dashboard\home.services')}}</span></a></li>
+                                    <li class=""><a href="{{route('order.index')}}"><i class="icon-list-ordered"></i> <span>{{__('dashboard\home.order')}}</span></a></li>
+
+
+
+
+                                </ul>
+                            </li>
+
 
 
 
@@ -352,7 +369,7 @@
 
 </div>
 <!-- /page container -->
-@stack('js')
+@yield('js')
 </body>
 </html>
 

@@ -22,6 +22,11 @@
     </div>
 
     <!-- Basic datatable -->
+    @if(session()->has('message'))
+        <div class="alert alert-success">
+            {{ session()->get('message') }}
+        </div>
+    @endif
     <div class="panel panel-flat">
         <div class="panel-heading">
             <h5 class="panel-title">{{__('dashboard\about.About')}}</h5>

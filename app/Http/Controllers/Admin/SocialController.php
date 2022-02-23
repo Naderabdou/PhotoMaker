@@ -17,7 +17,16 @@ class SocialController extends Controller
     public function store(SocialRequest $request){
      $Data=   $request->validated();
      Social::create($Data);
-     return redirect()->back();
+        if (app()->getLocale()=='ar'){
+            $message=' تم الاضافة بنجاح';
+
+        }
+        else{
+            $message='Added successfully ';
+        };
+
+
+        return redirect()->back()->with('message', $message);
 
 
     }
@@ -25,11 +34,29 @@ class SocialController extends Controller
         $Social=Social::findorFail($id);
         $Data=   $request->validated();
         $Social->update($Data);
-        return redirect()->back();
+        if (app()->getLocale()=='ar'){
+            $message=' تم التعديل بنجاح';
+
+        }
+        else{
+            $message='Edited successfully  ';
+        };
+
+
+        return redirect()->back()->with('message', $message);
     }
 public function destroy($id){
         Social::destroy($id);
-        return redirect()->back();
+    if (app()->getLocale()=='ar'){
+        $message=' تم الحذف بنجاح';
+
+    }
+    else{
+        $message='Deleted  successfully  ';
+    };
+
+
+    return redirect()->back()->with('message', $message);
 }
 
 

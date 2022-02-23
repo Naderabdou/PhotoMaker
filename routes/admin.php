@@ -23,10 +23,18 @@ Route::get('/', function () {
 Route::group(['middleware'=>'auth'], function() {
     Route::get('dashboard','DashboardController@index')->name('admin');
     Route::resource('social','SocialController');
+    Route::resource('slider','SliderController');
     Route::resource('about','AboutController');
     Route::resource('service','ServicesController');
     Route::resource('gallery/category','GalleryCategoryController');
     Route::resource('gallery/photo','PhotoGalleryController');
+    Route::resource('services/contact','ContactServicesController');
+    Route::resource('services/categoryContact','ServicesCategoryController');
+    Route::resource('contact/data','ContactController');
+    Route::post('status/{id}','ContactController@status')->name('status');
+
+    Route::resource('contact/order','ContactOrderController');
+
 
 });
 

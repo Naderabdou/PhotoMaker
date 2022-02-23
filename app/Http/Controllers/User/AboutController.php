@@ -10,9 +10,8 @@ use Illuminate\Http\Request;
 class AboutController extends Controller
 {
     public function index(){
-        $social=Social::latest()->first();
         $AboutAdmin=About::all();
 
-        return view('Theme.About_us',compact('social','AboutAdmin'));
+        return view('Theme.About_us',compact('AboutAdmin'));
     }
 }

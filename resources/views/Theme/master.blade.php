@@ -34,7 +34,7 @@
                     <span class="fa fa-bars"></span>
                 </button>
 
-                <a href="/theme/index.html" class="navbar-brand hidden-sm hidden-md hidden-lg"><img src="/theme/images/logo.png" alt="LOGO"></a>
+                <a href="{{route('home.index')}}" class="navbar-brand hidden-sm hidden-md hidden-lg"><img src="/theme/images/logo.png" alt="LOGO"></a>
             </div>
 
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
@@ -44,11 +44,11 @@
                     <li><a href="{{route('services.index')}}">{{__('theme\home.services')}}</a></li>
                 </ul>
 
-                <a href="/theme/index.html" class="navbar-brand hidden-xs text-center"><img src="/theme/images/logo.png" alt="LOGO"></a>
+                <a href="{{route('home.index')}}" class="navbar-brand hidden-xs text-center"><img src="/theme/images/logo.png" alt="LOGO"></a>
 
                 <ul class="nav navbar-nav navbar-left text-align-right">
                     <li><a href="{{route('gallery.index')}}">{{__('theme\home.gallery')}}</a></li>
-                    <li><a href="{{route('contact.index')}}">{{__('theme\home.contact')}}</a></li>
+                    <li><a href="{{route('contactus.index')}}">{{__('theme\home.contact')}}</a></li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{app()->getLocale()}}
@@ -71,15 +71,22 @@
 <!--===============================
     FOOTER
 ===================================-->
+@php
 
+    $soical= App\Models\Social::all()
+@endphp
 <footer class="text-center">
     <div class="container">
 
+
         <p>{{__('theme\home.footer')}} </p>
-       @isset($social)
-        <a href="{{$social->facebook_url}}"><i class="fa fa-facebook"></i></a>
-        <a href="{{$social->twitter_url}}"><i class="fa fa-twitter"></i></a>
-        <a href="{{$social->github_url}}"><i class="fa fa-github"></i></a>
+       @isset($soical)
+            @foreach($soical as $soicals)
+
+            <a href="{{$soicals->facebook_url}}"><i class="fa fa-facebook"></i></a>
+        <a href="{{$soicals->twitter_url}}"><i class="fa fa-twitter"></i></a>
+        <a href="{{$soicals->github_url}}"><i class="fa fa-github"></i></a>
+            @endforeach
         @endisset
 
     </div>

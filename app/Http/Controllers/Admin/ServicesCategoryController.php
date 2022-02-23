@@ -3,20 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Services\ServicesRequest;
-use App\Http\Requests\Services\ServicesUpdateRequest;
-use App\Models\Services;
+use App\Http\Requests\contact\ServicesCategoryRequest;
+use App\Http\Requests\contact\ServicesCategoryUpdateRequest;
+use App\Models\ServicesCatgory;
 use Illuminate\Http\Request;
 
-class ServicesController extends Controller
+class ServicesCategoryController extends Controller
 {
     public function index(){
-        $Service=Services::all();
-        return view('dashboard.Services.index',compact('Service'));
+        $category=ServicesCatgory::all();
+        return view('dashboard.contact.category',compact('category'));
     }
-    public function store(ServicesRequest $request){
-        $Data=$request->validated();
-        Services::create($Data);
+    public function store(ServicesCategoryRequest $request){
+        $data=$request->validated();
+        ServicesCatgory::create($data);
         if (app()->getLocale()=='ar'){
             $message=' تم الاضافة بنجاح';
 
@@ -28,10 +28,10 @@ class ServicesController extends Controller
 
         return redirect()->back()->with('message', $message);
     }
-    public function update(ServicesUpdateRequest $request,$id){
-        $Service=Services::findorFail($id);
-        $Data=$request->validated();
-        $Service->update($Data);
+    public function update(ServicesCategoryUpdateRequest $request,$id){
+        $category=ServicesCatgory::findorFail($id);
+     $data=$request->validated();
+     $category->update($data);
         if (app()->getLocale()=='ar'){
             $message=' تم التعديل بنجاح';
 
@@ -42,9 +42,10 @@ class ServicesController extends Controller
 
 
         return redirect()->back()->with('message', $message);
+
     }
     public function destroy($id){
-        Services::destroy($id);
+        ServicesCatgory::destroy($id);
         if (app()->getLocale()=='ar'){
             $message=' تم الحذف بنجاح';
 
@@ -56,5 +57,4 @@ class ServicesController extends Controller
 
         return redirect()->back()->with('message', $message);
     }
-
 }
